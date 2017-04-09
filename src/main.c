@@ -29,16 +29,26 @@ int main(void)
 //		}
 //		HAL_Delay(20);
 //	}
+
+
 	HAL_Init();
 	gpioInit();
 
 	USART2_Init();
 	char messaggio[] ={'H','e','l','l','o',' ','W','o','r','l','d','!','!'};
+	char messaggio2[] = {"Hello World!! int 123 - float 123.456"};
+
+
+
+	if (HAL_UART_Receive_IT(&UARTHandle2,(uint8_t *)aRxBuffer2,1)!= HAL_OK)
+		{
+			Error_Handler();
+		}
 	for(;;)
 	{
 	//	FunctionalStateBtnInt = BSP_PB_GetState(????);
 
-		HAL_UART_Transmit(&UARTHandle2,(uint8_t*)&messaggio,14,1);
+		//HAL_UART_Transmit(&UARTHandle2,(uint8_t*)&messaggio,14,1);
 		HAL_Delay(250);
 	}
 }

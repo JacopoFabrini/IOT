@@ -21,6 +21,9 @@ bool FunctionalStateBtnInt;
 
 UART_HandleTypeDef UARTHandle2;
 UART_HandleTypeDef printfPort;
-UART_HandleTypeDef UartHandle1;
+UART_HandleTypeDef UARTHandle1;
+
+char aRxBuffer2[];
+
 
 #endif /* MAIN_H_ */

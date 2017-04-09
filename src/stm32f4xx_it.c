@@ -61,3 +61,7 @@ void EXTI0_IRQHandler(void)
 		}
 	}
 }
+void USART2_IRQHandler(void)
+{
+	HAL_UART_IRQHandler(&UARTHandle2);
+}

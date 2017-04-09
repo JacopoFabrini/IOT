@@ -43,6 +43,8 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
 
 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+	HAL_NVIC_SetPriority(USART2_IRQn,0,1);
+	HAL_NVIC_EnableIRQ(USART2_IRQn);
 }
 
 void HAL_UART_MspDeInit(UART_HandleTypeDef *huart)
@@ -51,5 +53,27 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef *huart)
 	__HAL_RCC_USART2_RELEASE_RESET();
 	HAL_GPIO_DeInit(GPIOA, GPIO_PIN_2);
 	HAL_GPIO_DeInit(GPIOA, GPIO_PIN_3);
-};
 
+	HAL_NVIC_DisableIRQ(USART2_IRQn);
+};
+UART_HandleTypeDef HandleSelect(int portNum)
+{
+	switch(portNum)
+	{
+	case 1:
+		printfPort = UARTHandle1;
+		break;
+	default:
+		printfPort = UARTHandle2;
+	break;
+	}
+	return printfPort;
+};
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	if (huart->Instance==USART2)
+	{
+		HAL_UART_Transmit(huart,(uint8_t *)aRxBuffer2,1,1);
+		HAL_UART_Receive_IT(huart, (uint8_t *)aRxBuffer2,1);
+	}
+}
