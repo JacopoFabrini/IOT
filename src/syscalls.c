@@ -52,14 +52,20 @@
 #include <time.h>
 #include <sys/time.h>
 #include <sys/times.h>
-
+#include "main.h"
 
 /* Variables */
 //#undef errno
 extern int errno;
-extern int __io_putchar(int ch) __attribute__((weak));
-extern int __io_getchar(void) __attribute__((weak));
-
+int __io_putchar(int ch)
+{
+	HAL_UART_Transmit(&printfPort, (uint8_t *)&ch,1,1);
+	return ch;
+}
+int __io_getchar(void)
+{
+	return 0;//ITM_ReceiveChar();
+}
 register char * stack_ptr asm("sp");
 
 char *__env[1] = { 0 };
