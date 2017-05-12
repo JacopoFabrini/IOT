@@ -12,6 +12,7 @@
 #include "timer.h"
 #include "i2c.h"
 #include "HTS221.h"
+#include "LPS25HB.h"
 
 #ifndef MAIN_H_
 #define MAIN_H_

@@ -12,6 +12,7 @@
 #include "stm32f4xx.h"
 #include "stm32f4xx_nucleo.h"
 
+void USART1_Init();
 void USART2_Init();
 void HAL_UART_MspInit();
 void HAL_UART_MspDeInit();
